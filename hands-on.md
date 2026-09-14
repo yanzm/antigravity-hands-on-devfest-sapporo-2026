@@ -158,7 +158,33 @@ Antigravity 2.0 を起動し、左の **Projects** の横にある **+** ボタ�
 
 ### エージェントにアプリの作成を依頼する
 
-[haifu/prompts.md](haifu/prompts.md) の **ステップ 1** のプロンプトをコピーし、`<PROJECT_ID>` を自分のプロジェクト ID に置き換えて送信します。
+以下のプロンプトをコピーし、`<PROJECT_ID>` を自分のプロジェクト ID に置き換えて送信します。
+
+```
+ゲストハウスの宿泊予約システムを作ってください。
+
+## 機能（この 3 つだけ）
+1. 部屋一覧ページ : 部屋の名前・定員・料金を表示
+2. 空室確認 : チェックイン日・チェックアウト日を指定すると空いている部屋を表示
+3. 予約登録 : 部屋・日付・宿泊者名を指定して予約を作成。既存予約と日程が重なる場合はエラーにする
+
+## 技術要件
+- Node.js + Express + EJS テンプレート（フロントエンドフレームワークは使わない）
+- データは Google Cloud Firestore に保存（コレクション名 : rooms, reservations）
+- rooms のドキュメントは name（文字列）, capacity（整数）, price（整数）のフィールドを持つ
+- `npm start` で起動し、環境変数 PORT があればそのポートで 0.0.0.0 を listen する（デフォルトは 8080）
+- Google Cloud プロジェクト ID : <PROJECT_ID>
+
+## 注意
+- 管理画面、ログイン、キャンセル機能は不要
+- デザインはシンプルで良い
+```
+
+**送る前に、このプロンプトが何を頼んでいるか読んでみてください。**
+
+- 機能を **3 つに絞っている**のは、110 分で動くものにたどり着くためです。管理画面やキャンセルは、あとから頼めば足せます
+- **Firestore とコレクション名、フィールド名まで指定**しているのは、このあとステップ 3 で MCP から入れるデータと、アプリが読む形を一致させるためです。全員が同じ構成になるので、隣の人と見比べたり、15:00 のパートで共通の手順を使ったりできます
+- **`PORT` 環境変数で `0.0.0.0` を listen** は Cloud Run の約束事です。Cloud Run はコンテナに `PORT` を渡し、そのポートで待ち受けていることを期待します。ここを書き忘れると、ローカルでは動くのにデプロイ後に起動しない、という典型的な失敗になります
 
 ![プロンプト入力](images/prompt-input.png)
 
@@ -210,7 +236,21 @@ Antigravity 2.0 を起動し、左の **Projects** の横にある **+** ボタ�
 
 いよいよ MCP の出番です。エージェントに Firestore を直接操作させて、部屋データを登録します。
 
-**New Conversation** で新しい会話を始め、[haifu/prompts.md](haifu/prompts.md) の **ステップ 2** のプロンプトを送信します。
+**New Conversation** で新しい会話を始め、以下を送信します。
+
+```
+Firestore MCP を使って、rooms コレクションに以下の 4 部屋を登録してください。
+ドキュメント ID は括弧内の値を使ってください。
+
+- 男女共用ドミトリー (room-dormitory) : 定員 1 名、1 泊 3500 円
+- 和室「さくら」 (room-sakura) : 定員 2 名、1 泊 6000 円
+- 洋室「ツイン」 (room-twin) : 定員 2 名、1 泊 6500 円
+- ファミリールーム「松」 (room-matsu) : 定員 4 名、1 泊 14000 円
+
+登録後、rooms コレクションの内容を一覧して確認してください。
+```
+
+ドキュメント ID を指定しているのは、全員が同じ ID になるようにするためです（あとで「room-sakura に予約を入れて」のように話せます）。
 
 `google-cloud-firestore/add_document` の承認ダイアログが出るので、内容を見てみましょう。エージェントが Firestore の API の形式（`integerValue` や `stringValue` の型付き JSON）でドキュメントを組み立てているのが分かります。
 
@@ -247,7 +287,18 @@ Google Cloud コンソールの Firestore の画面 ( https://console.cloud.goog
 
 ## ステップ 5 : Cloud Run にデプロイする（目安 : 15 分）
 
-**New Conversation** で新しい会話を始め、[haifu/prompts.md](haifu/prompts.md) の **ステップ 3** のプロンプトを送信します。
+**New Conversation** で新しい会話を始め、`<PROJECT_ID>` を置き換えて送信します。
+
+```
+このフォルダを Cloud Run MCP を使って Cloud Run にデプロイしてください。
+プロジェクト ID : <PROJECT_ID>、リージョン : asia-northeast1、
+サービス名 : guesthouse-app、認証なしアクセスを許可してください。
+デプロイ後の動作確認は私が行うので、curl や gcloud は実行しないでください。
+```
+
+- **リージョン** は午前に作った Firestore と同じ東京（asia-northeast1）です
+- **認証なしアクセスを許可** は「誰でも URL を開ける」にする指定です。これがないと、ブラウザで開いても 403 になります
+- 最後の 1 行の意味は、デプロイが終わったあとの Note で説明します
 
 エージェントは Dockerfile と .dockerignore を自分で作り、`cloudrun/deploy_local_folder` を呼びます。承認ダイアログは **1 回だけ**です。
 
@@ -319,7 +370,12 @@ Antigravity 2.0 の得意分野です。新しい会話で、1 回に 1〜2 個�
 
 ### エージェントにログを取らせる
 
-15:00 のパートの予告です。[haifu/prompts.md](haifu/prompts.md) の **ステップ 4** のプロンプトを送ると、エージェントが Cloud Run MCP の `get_service_log` でログを取得し、警告があれば要約してくれます。
+15:00 のパートの予告です。以下を送ると、エージェントが Cloud Run MCP の `get_service_log` でログを取得し、警告があれば要約してくれます。
+
+```
+guesthouse-app の直近のログを Cloud Run MCP で取得して、エラーや警告がないか確認してください。
+警告があれば、それぞれ何が起きたのかを説明してください。
+```
 
 ![ログ取得](images/get-service-log.png)
 
@@ -401,7 +457,7 @@ gcloud projects delete <プロジェクトID>
 ## 参考資料
 
 - [Antigravity 2.0 ガイド](antigravity-guide.md) : 画面構成・設定・MCP の詳細
-- [配布プロンプト集](haifu/prompts.md) / [ワークスペースルール](haifu/workshop.md)
+- [ワークスペースルール](haifu/workshop.md) / [ルールの各項目の根拠](haifu/README.md)
 - Antigravity 公式ドキュメント : https://antigravity.google/docs
 - Cloud Run MCP（GitHub） : https://github.com/GoogleCloudPlatform/cloud-run-mcp
 - Firestore MCP（公式ドキュメント） : https://docs.cloud.google.com/firestore/native/docs/use-firestore-mcp

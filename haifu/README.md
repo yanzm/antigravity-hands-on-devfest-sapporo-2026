@@ -3,7 +3,6 @@
 | ファイル | 用途 | 参加者の操作 |
 |---|---|---|
 | [workshop.md](workshop.md) | ワークスペースルール（`.agents/rules/workshop.md` に置く） | 下のコマンドで配置 |
-| [prompts.md](prompts.md) | ステップごとの配布プロンプト + 困ったときの対処 | 貼り付けて使う |
 
 ## ルールの配置方法
 
