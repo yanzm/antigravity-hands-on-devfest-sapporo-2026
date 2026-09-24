@@ -73,7 +73,7 @@ gcloud config get-value project
 
 Antigravity 2.0 を起動し、左の **Projects** の横にある **+** ボタンから、新しくこのアプリ用のフォルダを作って開きます。
 
-<span style="color:salmon"><b>フォルダは `~/Projects/guesthouse-app` のように、他のファイルがない独立した場所に作ってください。</b></span> 親フォルダに関係ないファイルがあると、エージェントがそれを読みに行ってしまいます。
+<span style="color:salmon"><b>フォルダは `~/Projects/guesthouse-app` のように、新しく作った空のフォルダにしてください。</b></span> 書類フォルダやデスクトップの直下、他のプロジェクトの中には作らないでください。エージェントは作業中にプロジェクトフォルダの周りのファイルも読みに行くことがあり、関係ないファイルを読んでしまうと承認ダイアログが増えたり、混乱したりします。
 
 ### ワークスペースルールを置く
 
@@ -418,7 +418,7 @@ guesthouse-app の直近のログを Cloud Run MCP で取得して、エラー�
 | 入力欄の横に「⚠ MCP Error」、`sending "tools/call": Forbidden` | `roles/mcp.toolUser` が付いていない | 午前の手順で IAM ロールを付与する。オーナーでもこのロールは必要 |
 | デプロイで `Error deploying folder to Cloud Run: ... Premature close` | Node.js 22.23.0 / 24.17.0 の不具合 | Node を更新して **Antigravity を再起動**。スタッフに声をかけてください |
 | 承認ダイアログが連発する | エージェントが原因調査を始めた | **5 No** → 新しい会話 |
-| 「Allow read access to this path?」でプロジェクトの外のパスが出る | 親フォルダを読もうとしている | No を選ぶ。プロジェクトは独立したフォルダに作る |
+| 「Allow read access to this path?」で、プロジェクトフォルダの外のパスが表示される | エージェントがプロジェクトの外（1 つ上のフォルダなど）のファイルを読もうとしている | **5 No** を選ぶ。プロジェクトを他のファイルがある場所の中に作っていると起きやすい |
 | 「Failed to send」と表示される | ログインの問題 | 一度ログアウトして再ログイン |
 
 ![Forbidden エラー](images/mcp-error-forbidden.png)
