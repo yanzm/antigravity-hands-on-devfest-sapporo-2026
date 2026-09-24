@@ -71,9 +71,21 @@ gcloud config get-value project
 
 ### プロジェクトフォルダを作る
 
-Antigravity 2.0 を起動し、左の **Projects** の横にある **+** ボタンから、新しくこのアプリ用のフォルダを作って開きます。
+Antigravity 2.0 を起動します。まだプロジェクトがないので、左の **Projects** は空です。
 
-フォルダは `~/Projects/guesthouse-app` のように、新しく作った空のフォルダにしてください。場所はどこでも構いませんが、エージェントは作業中に 1 つ上のフォルダを読みに行こうとすることがあります。そのときは「Allow read access to this path?」というダイアログが出るので、**No** を選んでください（ダイアログの見方はステップ 2 で説明します）。
+![Antigravity 2.0 の初期画面](images/2.0-initial.png)
+
+**Projects** の横にあるフォルダのアイコン（**Create New Project**）をクリックし、**New Project** を選びます。
+
+![Create New Project](images/create-new-project.png)
+
+![New Project / Quick Start](images/new-project-menu.png)
+
+フォルダの選択画面が開くので、`~/Projects/guesthouse-app` のように、**新しく作った空のフォルダ**を選びます。場所はどこでも構いませんが、エージェントは作業中に 1 つ上のフォルダを読みに行こうとすることがあります。そのときは「Allow read access to this path?」というダイアログが出るので、**No** を選んでください（ダイアログの見方はステップ 2 で説明します）。
+
+左の **Projects** にフォルダが表示され、入力欄の上のプロジェクト名もそのフォルダになれば OK です。
+
+![プロジェクト作成後](images/2.0-project-created.png)
 
 ### ワークスペースルールを置く
 
@@ -83,11 +95,21 @@ Antigravity 2.0 を起動し、左の **Projects** の横にある **+** ボタ�
 
 1. Antigravity 2.0 の右上の **Open IDE** をクリックします。同じプロジェクトフォルダが IDE で開きます（初回は IDE 側でも Google ログインを求められます）
 
-2. IDE の左のファイルエクスプローラで、プロジェクトのルートを右クリック → **New Folder** で `.agents` を作り、その中にもう一度 **New Folder** で `rules` を作ります
+   ![IDE で開いたところ](images/ide-opened.png)
 
-3. `rules` フォルダを右クリック → **New File** で `workshop.md` を作ります
+2. IDE の左のファイルエクスプローラで、プロジェクト名の右にある **New Folder** アイコンから `.agents` フォルダを作り、その `.agents` を選んだ状態でもう一度 **New Folder** で `rules` を作ります
+
+   ![.agents フォルダを作る](images/ide-new-folder-agents.png)
+
+   ![rules フォルダを作る](images/ide-new-folder-rules.png)
+
+3. `rules` フォルダを選んだ状態で **New File** アイコンから `workshop.md` を作ります
+
+   ![workshop.md を作る](images/ide-new-file-workshop.png)
 
 4. 作ったファイルを開くと、**ルール専用の編集画面**が表示されます
+
+   ![ルールの編集画面](images/ide-rule-editor.png)
 
    - **Activation Mode** : **Always On** を選びます（「このルールを常に適用する」という意味です）
    - **Content** : 以下をそのまま貼り付けます
