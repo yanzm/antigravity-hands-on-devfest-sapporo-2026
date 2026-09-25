@@ -194,7 +194,7 @@ Antigravity 2.0 を起動します。まだプロジェクトがないので、�
 
 ![Cloud Run を検索](images/mcp-store-cloudrun.png)
 
-5. Customizations に戻ると、2 つの MCP が有効（緑の ●）になっています。Cloud Run は **8 tools**、Firestore は **25 tools** と表示されていれば OK です
+5. Customizations に戻ると、2 つの MCP が有効（緑の ●）になっています。Cloud Run は **8 tools**、Firestore は **23 tools** と表示されていれば OK です
 
 ![MCP インストール完了](images/mcp-installed.png)
 

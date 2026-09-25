@@ -262,7 +262,7 @@ Settings → **Customizations** → **Installed MCP Servers** の **Add MCP +** 
 
 **Cloud Run MCP（8 ツール）** : `deploy_local_folder`, `deploy_file_contents`, `deploy_container_image`, `list_services`, `get_service`, `get_service_log`, `list_projects`, `create_project`
 
-**Firestore MCP（25 ツール）** : `list_databases`, `list_collections`, `list_documents`, `add_document`, `get_document`, `update_document`, `delete_document` など
+**Firestore MCP（23 ツール）** : `list_databases`, `list_collections`, `list_documents`, `add_document`, `get_document`, `update_document`, `delete_document` など
 
 エージェントは、頼まなくても状況確認のために MCP を呼ぶことがあります（例 : アプリ生成中に `list_collections` で DB の状態を見る）。
 
