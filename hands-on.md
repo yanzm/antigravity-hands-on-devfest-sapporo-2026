@@ -194,7 +194,7 @@ Antigravity 2.0 を起動します。まだプロジェクトがないので、�
 
 ![Cloud Run を検索](images/mcp-store-cloudrun.png)
 
-5. Customizations に戻ると、2 つの MCP が有効（緑の ●）になっています。Cloud Run は **8 tools**、Firestore は **23 tools** と表示されていれば OK です
+5. Customizations に戻ると、2 つの MCP が有効（緑の ●）になっています。「〜 tools enabled」の部分をクリックすると、エージェントに増えたツールの一覧が見えます。Cloud Run の方に `deploy_local_folder` や `get_service_log`、Firestore の方に `add_document` や `list_documents` があることを確認してください
 
 ![MCP インストール完了](images/mcp-installed.png)
 
