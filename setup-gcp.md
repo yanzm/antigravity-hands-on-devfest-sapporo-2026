@@ -56,9 +56,10 @@ gcloud auth application-default login
 | コマンド | 誰のための認証か |
 | --- | --- |
 | `gcloud auth login` | **gcloud コマンド自体**が使う（このあと打つコマンドのため） |
-| `gcloud auth application-default login` | **あなたが書いたプログラムや、エージェントのツール**が Google Cloud にアクセスするときに使う（ADC = Application Default Credentials） |
+| `gcloud auth application-default login` | **あなたが書いたプログラムや、エージェントのツール**が Google Cloud にアクセスするときに使う（ADC = [Application Default Credentials](https://docs.cloud.google.com/docs/authentication/application-default-credentials)） |
 
 午後は、エージェントが作ったアプリと MCP の両方が ADC を使って Firestore や Cloud Run に繋がります。片方だけやって「認証したのに繋がらない」となるのが定番の詰まりポイントです。
+2つのコマンドを同時に実行することもできます。 `gcloud auth login --update-adc` で同時に認証を行うことができます。
 
 ---
 
