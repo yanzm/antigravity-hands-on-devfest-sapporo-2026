@@ -296,7 +296,20 @@ read_file(/Users/.../mcp_config.json)           ← プロジェクト外のフ�
 
 <span style="color:salmon"><b>「always allow」は取り消さない限り残ります。</b></span> 検証中、エージェントの調査モードのときに「always allow in this project」を選んでしまったコマンド（`gcloud auth`、トークンを外部に送る `curl` など）が、そのまま許可リストに残っていました。承認ダイアログで 2〜4 を選ぶのは、**中身を読んで「これは毎回許可してよい」と判断できるものだけ**にしてください。
 
-> **Note** : Settings には、承認ダイアログを出さずに実行する範囲を広げる設定があります（許可リスト / 拒否リスト、Terminal Sandboxing）。ハンズオンでは **「全部許可」に相当する設定にはしない**でください。エージェントが失敗したときの「調査モード」を止められなくなります。
+### Permission Preset
+
+Settings → Projects → （プロジェクト名）→ **Permission Settings** の **Permission Preset** で、承認ダイアログをどこまで出すかを選べます。
+
+| プリセット | 挙動 |
+| --- | --- |
+| Inherit Global | グローバル設定（Settings → General の Global Permissions）に従う |
+| Request Review | **すべてのターミナルコマンドで承認を求める** |
+| Default | 危険な操作のときだけ承認を求める |
+| Turbo | 制限なしで実行する |
+
+<span style="color:salmon"><b>ハンズオンでは Turbo にしないでください。</b></span> エージェントが失敗したときの「調査モード」を止められなくなります。
+
+同じ画面に **File Access Rules**（ファイルの読み書きの許可/拒否パス）、**Network Access Rules**（エージェントが読んでよい URL/ドメイン）、**Terminal Commands**（許可するコマンド）、**MCP Tools** の個別設定もあります。承認ダイアログで「always allow」を選んだものはここに溜まります。
 
 
 ## 参考資料・コンテンツ

@@ -485,7 +485,7 @@ guesthouse-app の直近のログを Cloud Run MCP で取得して、エラー�
 
 ### 「always allow」は慎重に
 
-承認ダイアログで **2〜4（always allow）** を選ぶと、その操作はプロジェクトの許可リストに保存され、次からはダイアログなしで実行されます。<span style="color:salmon"><b>調査モードに入ったエージェントが出してくるコマンド（`gcloud auth` や `curl` など）に always allow を選ぶと、それ以降は止められません。</b></span> always allow は、中身を読んで「毎回許可してよい」と判断できるもの（今日なら Firestore MCP や Cloud Run MCP のツール）だけにしてください。Settings に「すべて自動で許可する」に相当する設定があっても、今日は使わないでください。詳しくは [Antigravity 2.0 ガイド](antigravity-guide.md#権限エージェントに何を許すか) を参照してください。
+承認ダイアログで **2〜4（always allow）** を選ぶと、その操作はプロジェクトの許可リストに保存され、次からはダイアログなしで実行されます。<span style="color:salmon"><b>調査モードに入ったエージェントが出してくるコマンド（`gcloud auth` や `curl` など）に always allow を選ぶと、それ以降は止められません。</b></span> always allow は、中身を読んで「毎回許可してよい」と判断できるもの（今日なら Firestore MCP や Cloud Run MCP のツール）だけにしてください。Settings のプロジェクト設定にある **Permission Preset** を **Turbo**（制限なしで実行）にするのも同じ理由で NG です。詳しくは [Antigravity 2.0 ガイド](antigravity-guide.md#権限エージェントに何を許すか) を参照してください。
 
 ## クォータ節約＆開発のコツ
 
