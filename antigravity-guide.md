@@ -310,6 +310,12 @@ Settings → Projects → （プロジェクト名）→ **Permission Settings**
 
 <span style="color:salmon"><b>ハンズオンでは Turbo にしないでください。</b></span> エージェントが失敗したときの「調査モード」を止められなくなります。
 
+> **Note** : **business account でログインしている場合（ハンズオンのログイン方法）は、項目名が変わります。** Settings → General の Global Permissions に、**Security Preset**（Default / Full machine / Turbo mode / Custom）、**Outside of folders file access policy**、**Terminal Command Auto Execution**（Proceed In Sandbox / Require Review / Always Proceed）、**Enable Sandbox Mode (Preview)** のトグルが並びます。プロジェクトの設定では Security Preset が Inherit Global になります。
+>
+> この画面では、どのプリセットもサンドボックスを有効にしません。上の表の Default と同じ動き（サンドボックスの中では承認なし、外に出るときだけ承認）にするには、**Enable Sandbox Mode をオン**、**Terminal Command Auto Execution を Proceed In Sandbox** にします。サンドボックスをオンにすると Security Preset は **Custom** と表示されます。これは正常です。
+>
+> 2026/10 時点の公式ドキュメントでは、Security Preset の画面は Windows 向けの説明として載っています（[Terminal sandbox](https://antigravity.google/docs/sandbox/)）。検証では、macOS でも business account でログインするとこの画面になりました。
+
 同じ画面に **File Access Rules**（ファイルの読み書きの許可/拒否パス）、**Network Access Rules**（エージェントが読んでよい URL/ドメイン）、**Terminal Commands**（許可するコマンド）、**MCP Tools** の個別設定もあります。承認ダイアログで「always allow」を選んだものはここに溜まります。
 
 
