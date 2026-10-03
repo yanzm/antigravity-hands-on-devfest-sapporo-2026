@@ -97,6 +97,26 @@ Antigravity 2.0 には、午前に作った Google Cloud プロジェクトを�
 
 ![Account の画面](images/login-account.png)
 
+### 3. 権限の設定をそろえる
+
+同じ **Settings** → **General** の **Global Permissions** を、次の 3 つにそろえます。
+
+| 項目 | 値 |
+| --- | --- |
+| **Terminal Command Auto Execution** | **Proceed In Sandbox** |
+| **Enable Sandbox Mode (Preview)** | **オン** |
+| **Outside of folders file access policy** | **Always Ask** |
+
+![Global Permissions の設定](images/settings-permissions.png)
+
+**何をしているか** : エージェントがターミナルでコマンドを実行するときの扱いを決めています。
+
+- **サンドボックス**は、エージェントが実行するコマンドを隔離された環境で動かす仕組みです。プロジェクトのフォルダの中だけが見え、ネットワークには繋がりません
+- **Proceed In Sandbox** は「サンドボックスの中なら承認なしで実行してよい。外で実行したいときは承認を求める」という設定です。`ls` や `cat` のような安全なコマンドはすぐ動き、npm のレジストリに繋ぐような操作は毎回あなたに聞いてきます
+- **Always Ask** は、エージェントがプロジェクトのフォルダの外のファイルを読もうとしたときに、必ず聞いてくる設定です
+
+このドキュメントの手順と画面は、この設定で検証しています。設定を変えると、**Security Preset** が **Custom** と表示されますが、そのままで構いません。
+
 > **Note** : 午前の手順で Agent Platform API を有効化していないと、最初の依頼で次のエラーになります。
 >
 > ```
